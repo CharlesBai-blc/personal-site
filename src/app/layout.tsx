@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "../components/Sidebar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,7 +17,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - Personal Website",
+  title: "CB WIP",
   description: "Welcome to my personal website. Discover my story, passions, and professional journey.",
 };
 
