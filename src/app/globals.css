@@ -1,28 +1,71 @@
 @import "tailwindcss";
 
+@import "tailwindcss";
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ReactBits-inspired muted palette */
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --primary: #6b7280;
+  --primary-dark: #4b5563;
+  --secondary: #f3f4f6;
+  --accent: #9ca3af;
+  --mint-light: #f0fdf4;
+  --mint-medium: #dcfce7;
+  --sage: #6b7280;
+  --forest: #374151;
+  --mist: #f9fafb;
+  --text-light: #6b7280;
+  --text-dark: #1a1a1a;
+  --section-bg: #ffffff;
+  --border: #e5e7eb;
+  --sidebar-bg: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-mint-light: var(--mint-light);
+  --color-mint-medium: var(--mint-medium);
+  --color-sage: var(--sage);
+  --color-forest: var(--forest);
+  --color-mist: var(--mist);
+  --color-text-light: var(--text-light);
+  --color-border: var(--border);
+  --color-sidebar-bg: var(--sidebar-bg);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #e5e5e5;
+    --primary: #a1a1aa;
+    --primary-dark: #71717a;
+    --secondary: #18181b;
+    --accent: #71717a;
+    --mint-light: #0f172a;
+    --mint-medium: #1e293b;
+    --sage: #a1a1aa;
+    --forest: #e5e5e5;
+    --mist: #0a0a0a;
+    --text-light: #a1a1aa;
+    --text-dark: #e5e5e5;
+    --section-bg: #111111;
+    --border: #262626;
+    --sidebar-bg: #111111;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 /* Smooth scrolling */
@@ -36,16 +79,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--mist);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--sage);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--forest);
 }
 
 /* Custom animations */
@@ -66,7 +109,175 @@ html {
 
 /* Glassmorphism effect */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(168, 230, 207, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(168, 230, 207, 0.2);
+}
+
+/* Nature-inspired gradients */
+.gradient-mint {
+  background: linear-gradient(135deg, var(--mint-light) 0%, var(--primary) 100%);
+}
+
+.gradient-mist {
+  background: linear-gradient(135deg, var(--mist) 0%, var(--secondary) 100%);
+}
+
+.gradient-forest {
+  background: linear-gradient(135deg, var(--sage) 0%, var(--forest) 100%);
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.text-nature {
+  color: var(--text-dark);
+}
+
+/* Nature decorations */
+.nature-leaf {
+  position: absolute;
+  opacity: 0.3;
+  color: var(--sage);
+  font-size: 1.5rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.nature-leaf:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.nature-leaf:nth-child(3) {
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+/* Subtle nature patterns */
+.nature-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 80%, var(--mint-light) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--secondary) 0%, transparent 50%);
+  background-size: 400px 400px;
+  background-position: 0 0, 200px 200px;
+}
+
+/* Flowing Menu Styles */
+.flowing-menu {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.flowing-menu-items {
+  position: relative;
+  z-index: 2;
+}
+
+.flowing-menu-item {
+  position: relative;
+  margin-bottom: 1px;
+  transition: all 0.3s ease;
+}
+
+.flowing-menu-item.active {
+  z-index: 3;
+}
+
+.flowing-menu-link {
+  display: block;
+  padding: 24px;
+  background: var(--section-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.flowing-menu-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+.flowing-menu-content {
+  position: relative;
+  z-index: 2;
+}
+
+.flowing-menu-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 8px 0;
+  font-family: var(--font-display);
+}
+
+.flowing-menu-description {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.flowing-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 12px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.flowing-menu-item.active .flowing-background {
+  opacity: 0.15;
+}
+
+.flowing-menu-item.active .flowing-menu-link {
+  background: var(--section-bg);
+  border-color: var(--primary);
+}
+
+.flowing-menu-item.active .flowing-menu-title {
+  color: var(--foreground);
+}
+
+/* Hidden Sidebar Styles */
+.sidebar-hidden {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-hidden:hover {
+  transform: translateX(0);
+}
+
+/* Sidebar hover trigger area */
+.sidebar-trigger {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  z-index: 40;
+  background: transparent;
+}
+
+.sidebar-trigger:hover + .sidebar-hidden {
+  transform: translateX(0);
 }
