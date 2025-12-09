@@ -23,7 +23,7 @@
   --border: oklch(0.92 0.004 286.32);
   --sidebar-bg: #ffffff;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: #fff8f0;
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -121,11 +121,43 @@ body {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 400;
   line-height: 1.6;
+  background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 50%, #ffd4b3 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+html {
+  background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 50%, #ffd4b3 100%);
+  background-attachment: fixed;
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Scroll snap */
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Subtle bounce animation - 50% less movement */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -7.5px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+  transform: translate(-50%, 0);
 }
 
 /* Custom scrollbar */
@@ -312,30 +344,7 @@ html {
   color: var(--foreground);
 }
 
-/* Hidden Sidebar Styles */
-.sidebar-hidden {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-
-.sidebar-hidden:hover {
-  transform: translateX(0);
-}
-
-/* Sidebar hover trigger area */
-.sidebar-trigger {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 20px;
-  height: 100%;
-  z-index: 40;
-  background: transparent;
-}
-
-.sidebar-trigger:hover + .sidebar-hidden {
-  transform: translateX(0);
-}
+/* Sidebar Styles - Always Visible */
 
 .dark {
   --background: oklch(0.141 0.005 285.823);
@@ -376,6 +385,6 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }

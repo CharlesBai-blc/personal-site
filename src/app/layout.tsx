@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Sidebar from "../components/Sidebar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,8 +30,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} antialiased`}
       >
-        <div className="sidebar-trigger"></div>
-        <Sidebar />
         <main>
           {children}
         </main>

@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 export default function Sidebar() {
   return (
-    <aside className="fixed left-0 top-0 h-full w-72 bg-sidebar-bg border-r border-border shadow-sm z-50 hidden lg:block sidebar-hidden">
+    <aside className="fixed left-0 top-0 h-full w-64 sm:w-72 bg-white/98 backdrop-blur-md border-r-2 border-orange-300/50 shadow-2xl z-50 block">
       <div className="flex flex-col h-full">
         {/* Header */}
-        <div className="p-8 border-b border-border">
-          <h1 className="text-2xl font-semibold text-foreground font-display">Your Name</h1>
-          <p className="text-sm text-text-light mt-1">Creative Professional</p>
+        <div className="p-6 sm:p-8 border-b-2 border-orange-200/60 bg-gradient-to-br from-orange-50/50 to-amber-50/50">
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground font-display">Your Name</h1>
+          <p className="text-sm text-text-light mt-1 font-medium">Creative Professional</p>
         </div>
 
         {/* Navigation */}
