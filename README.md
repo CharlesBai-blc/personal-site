@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Site - Monorepo
 
-## Getting Started
+A full-stack personal website with separated frontend and backend.
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+psite/
+├── frontend/     # Next.js frontend application
+├── backend/      # Express.js backend API
+└── package.json  # Root package.json with scripts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Install Dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run install:all
+```
 
-## Learn More
+Or install individually:
+```bash
+npm install
+cd frontend && npm install
+cd ../backend && npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Configure Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Backend** (`backend/.env`):
+```env
+GITHUB_TOKEN=your_github_token_here
+PORT=3001
+FRONTEND_URL=http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Frontend** (`frontend/.env.local`):
+```env
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
+```
 
-## Deploy on Vercel
+### 3. Run Development Servers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run both frontend and backend:
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Or run individually:
+```bash
+# Frontend (port 3000)
+npm run dev:frontend
+
+# Backend (port 3001)
+npm run dev:backend
+```
+
+## Available Scripts
+
+### Root Level
+- `npm run dev` - Run both frontend and backend
+- `npm run build` - Build both frontend and backend
+- `npm run install:all` - Install dependencies for all projects
+
+### Frontend
+- `cd frontend && npm run dev` - Start Next.js dev server
+- `cd frontend && npm run build` - Build for production
+- `cd frontend && npm run start` - Start production server
+
+### Backend
+- `cd backend && npm run dev` - Start Express dev server with hot reload
+- `cd backend && npm run build` - Compile TypeScript
+- `cd backend && npm run start` - Start production server
+
+## Tech Stack
+
+**Frontend:**
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+
+**Backend:**
+- Express.js
+- TypeScript
+- Node.js

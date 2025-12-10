@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import express from 'express';
+
+const router = express.Router();
 
 interface ContributionDay {
   date: string;
@@ -9,25 +11,20 @@ interface ContributionWeek {
   contributionDays: ContributionDay[];
 }
 
-export async function GET(request: NextRequest) {
+router.get('/', async (req, res) => {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const username = searchParams.get('username');
+    const username = req.query.username as string;
 
     if (!username) {
-      return NextResponse.json(
-        { error: 'Username is required' },
-        { status: 400 }
-      );
+      return res.status(400).json({ error: 'Username is required' });
     }
 
     const githubToken = process.env.GITHUB_TOKEN;
 
     if (!githubToken) {
-      return NextResponse.json(
-        { error: 'GitHub token not configured. Add GITHUB_TOKEN to .env.local' },
-        { status: 500 }
-      );
+      return res.status(500).json({
+        error: 'GitHub token not configured. Add GITHUB_TOKEN to .env',
+      });
     }
 
     // Calculate date range for last year
@@ -62,7 +59,7 @@ export async function GET(request: NextRequest) {
       },
       body: JSON.stringify({
         query,
-        variables: { 
+        variables: {
           username,
           from: fromDate.toISOString(),
           to: toDate.toISOString(),
@@ -78,10 +75,7 @@ export async function GET(request: NextRequest) {
 
     if (data.errors) {
       const errorMessage = data.errors[0]?.message || 'GitHub API error';
-      return NextResponse.json(
-        { error: errorMessage },
-        { status: 400 }
-      );
+      return res.status(400).json({ error: errorMessage });
     }
 
     const weeks = (data.data?.user?.contributionsCollection?.contributionCalendar?.weeks || []) as ContributionWeek[];
@@ -104,7 +98,7 @@ export async function GET(request: NextRequest) {
     // Calculate actual total from contributions (for verification)
     const calculatedTotal = contributions.reduce((sum, day) => sum + day.contributionCount, 0);
 
-    return NextResponse.json({
+    return res.json({
       contributions,
       total,
       calculatedTotal, // For debugging - remove if not needed
@@ -114,9 +108,11 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('GitHub contributions error:', error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to fetch contributions' },
-      { status: 500 }
-    );
+    return res.status(500).json({
+      error: error instanceof Error ? error.message : 'Failed to fetch contributions',
+    });
   }
-}
+});
+
+export default router;
+

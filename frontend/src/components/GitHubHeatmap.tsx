@@ -21,7 +21,8 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
     const fetchContributions = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/github-contributions?username=${username}`);
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+        const response = await fetch(`${backendUrl}/api/github-contributions?username=${username}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch contributions');
