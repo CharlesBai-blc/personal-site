@@ -71,7 +71,19 @@ router.get('/', async (req, res) => {
       throw new Error(`GitHub API error: ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data = await response.json() as {
+      errors?: Array<{ message: string }>;
+      data?: {
+        user?: {
+          contributionsCollection?: {
+            contributionCalendar?: {
+              weeks?: ContributionWeek[];
+              totalContributions?: number;
+            };
+          };
+        };
+      };
+    };
 
     if (data.errors) {
       const errorMessage = data.errors[0]?.message || 'GitHub API error';

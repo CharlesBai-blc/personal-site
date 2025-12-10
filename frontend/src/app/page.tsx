@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import GitHubHeatmap from "../components/GitHubHeatmap";
 
 interface ProjectBulletProps {
@@ -41,6 +42,7 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
 
 export default function Home() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const router = useRouter();
 
   const navItems = [
     { name: "about", href: "/about" },
@@ -49,30 +51,43 @@ export default function Home() {
     { name: "contact", href: "/contact" },
   ];
 
+  // Prefetch all pages on mount for instant navigation
+  useEffect(() => {
+    navItems.forEach((item) => {
+      router.prefetch(item.href);
+    });
+  }, [router]);
+
+  // Prefetch on hover for faster navigation
+  const handleMouseEnter = (href: string, name: string) => {
+    setHoveredButton(name);
+    router.prefetch(href);
+  };
+
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
       {/* Main Hero Section - Full Screen */}
       <section className="h-screen flex items-center justify-center px-4 relative snap-start">
         {/* Navigation - Top Right */}
-        <nav className="fixed top-6 right-6 flex gap-6 z-50">
+        <nav className="fixed top-8 right-8 sm:top-10 sm:right-10 flex gap-8 z-50">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               prefetch={true}
-              onMouseEnter={() => setHoveredButton(item.name)}
+              onMouseEnter={() => handleMouseEnter(item.href, item.name)}
               onMouseLeave={() => setHoveredButton(null)}
               className={`
                 relative
-                font-extralight text-foreground
+                font-light text-foreground
                 transition-all duration-300 ease-out
                 cursor-pointer
-                text-xs tracking-widest
+                text-sm tracking-widest
                 lowercase
                 ${
                   hoveredButton === item.name
                     ? "opacity-100 scale-105"
-                    : "opacity-50 hover:opacity-70"
+                    : "opacity-70 hover:opacity-90"
                 }
               `}
             >

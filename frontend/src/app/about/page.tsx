@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function About() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const router = useRouter();
 
   const navItems = [
     { name: 'about', href: '/about' },
@@ -13,27 +15,39 @@ export default function About() {
     { name: 'contact', href: '/contact' },
   ];
 
+  useEffect(() => {
+    navItems.forEach((item) => {
+      router.prefetch(item.href);
+    });
+    router.prefetch('/'); // Prefetch home page
+  }, [router]);
+
+  const handleMouseEnter = (href: string, name: string) => {
+    setHoveredButton(name);
+    router.prefetch(href);
+  };
+
   return (
     <div className="min-h-screen relative">
       {/* Navigation - Top Right */}
-      <nav className="fixed top-6 right-6 flex gap-6 z-50">
+      <nav className="fixed top-8 right-8 sm:top-10 sm:right-10 flex gap-8 z-50">
         {navItems.map((item) => (
           <Link
             key={item.name}
             href={item.href}
             prefetch={true}
-            onMouseEnter={() => setHoveredButton(item.name)}
+            onMouseEnter={() => handleMouseEnter(item.href, item.name)}
             onMouseLeave={() => setHoveredButton(null)}
             className={`
               relative
-              font-extralight text-foreground
+              font-light text-foreground
               transition-all duration-300 ease-out
               cursor-pointer
-              text-xs tracking-widest
+              text-sm tracking-widest
               lowercase
               ${hoveredButton === item.name
                 ? 'opacity-100 scale-105'
-                : 'opacity-50 hover:opacity-70'
+                : 'opacity-70 hover:opacity-90'
               }
             `}
           >
