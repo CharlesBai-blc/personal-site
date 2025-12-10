@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import GitHubHeatmap from '../components/GitHubHeatmap';
 
 export default function Home() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
@@ -50,7 +51,7 @@ export default function Home() {
               Charles Bai
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground font-light">
-              Creative Professional
+              fun-ware developer
             </p>
           </div>
         </div>
@@ -76,7 +77,7 @@ export default function Home() {
       {/* Section 1 */}
       <section className="h-screen flex items-center justify-center px-4 snap-start bg-foreground/5">
         <div className="text-center max-w-4xl">
-          {/* Empty section - placeholder */}
+          <GitHubHeatmap username="CharlesBai-blc" />
         </div>
       </section>
 
