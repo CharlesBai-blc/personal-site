@@ -21,7 +21,7 @@ export default function Blog() {
       router.prefetch(item.href);
     });
     router.prefetch('/'); // Prefetch home page
-  }, [router]);
+  }, [router, navItems]);
 
   const handleMouseEnter = (href: string, name: string) => {
     setHoveredButton(name);

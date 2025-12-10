@@ -56,7 +56,7 @@ export default function Home() {
     navItems.forEach((item) => {
       router.prefetch(item.href);
     });
-  }, [router]);
+  }, [router, navItems]);
 
   // Prefetch on hover for faster navigation
   const handleMouseEnter = (href: string, name: string) => {
