@@ -163,16 +163,16 @@ export default function CLINav({ onSectionChange }: CLINavProps) {
     <nav className="fixed top-8 right-8 sm:top-10 sm:right-10 flex items-center gap-4 z-50">
       {/* CLI Input - Leftmost */}
       <div className="relative flex items-center">
-        <span className="font-mono text-xs text-foreground opacity-50 mr-1">
+        <span className="font-mono text-xs text-foreground opacity-70 mr-1">
           $
         </span>
         <div className="relative">
           {!isCliFocused && (
             <div className="absolute inset-0 flex items-center pointer-events-none">
-              <span className="font-mono text-xs text-foreground/30">cd</span>
+              <span className="font-mono text-xs text-foreground/50">cd</span>
               <span
                 key={placeholderIndex}
-                className={`font-mono text-xs text-foreground/30 ml-1 ${
+                className={`font-mono text-xs text-foreground/50 ml-1 ${
                   isFading ? "animate-fade-out" : "animate-fade-in"
                 }`}
               >
@@ -197,13 +197,13 @@ export default function CLINav({ onSectionChange }: CLINavProps) {
               ${
                 isCliFocused
                   ? "w-28 opacity-100"
-                  : "opacity-50 hover:opacity-70"
+                  : "opacity-70 hover:opacity-85"
               }
             `}
           />
         </div>
         {isCliFocused && (
-          <span className="font-mono text-xs text-foreground opacity-50 animate-pulse ml-0.5">
+          <span className="font-mono text-xs text-foreground opacity-70 animate-pulse ml-0.5">
             |
           </span>
         )}
