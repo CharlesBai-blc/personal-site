@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import GitHubHeatmap from '../components/GitHubHeatmap';
+import Link from "next/link";
+import { useState } from "react";
+import GitHubHeatmap from "../components/GitHubHeatmap";
 
 interface ProjectBulletProps {
   title: string;
@@ -20,15 +20,21 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
     >
       <button className="px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg hover:bg-white/30 transition-all duration-300 shadow-lg text-left min-w-[200px]">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full bg-foreground transition-all duration-300 ${isHovered ? 'scale-150' : ''}`} />
+          <div
+            className={`w-2 h-2 rounded-full bg-foreground transition-all duration-300 ${
+              isHovered ? "scale-150" : ""
+            }`}
+          />
           <span className="font-light text-foreground text-sm">{title}</span>
         </div>
-        {isHovered && (
-          <p className="mt-2 text-xs text-muted-foreground font-light leading-relaxed">
+      </button>
+      {isHovered && (
+        <div className="absolute top-full left-0 mt-2 w-64 px-4 py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg shadow-lg z-10 pointer-events-none">
+          <p className="text-xs text-muted-foreground font-light leading-relaxed">
             {description}
           </p>
-        )}
-      </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -37,10 +43,10 @@ export default function Home() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   const navItems = [
-    { name: 'about', href: '/about' },
-    { name: 'portfolio', href: '/portfolio' },
-    { name: 'blog', href: '/blog' },
-    { name: 'contact', href: '/contact' },
+    { name: "about", href: "/about" },
+    { name: "portfolio", href: "/portfolio" },
+    { name: "blog", href: "/blog" },
+    { name: "contact", href: "/contact" },
   ];
 
   return (
@@ -53,6 +59,7 @@ export default function Home() {
             <Link
               key={item.name}
               href={item.href}
+              prefetch={true}
               onMouseEnter={() => setHoveredButton(item.name)}
               onMouseLeave={() => setHoveredButton(null)}
               className={`
@@ -62,9 +69,10 @@ export default function Home() {
                 cursor-pointer
                 text-xs tracking-widest
                 lowercase
-                ${hoveredButton === item.name
-                  ? 'opacity-100 scale-105'
-                  : 'opacity-50 hover:opacity-70'
+                ${
+                  hoveredButton === item.name
+                    ? "opacity-100 scale-105"
+                    : "opacity-50 hover:opacity-70"
                 }
               `}
             >
@@ -104,8 +112,8 @@ export default function Home() {
       </section>
 
       {/* Section 1 */}
-      <section className="h-screen flex items-center justify-center px-4 snap-start bg-foreground/5">
-        <div className="text-center max-w-6xl w-full space-y-12">
+      <section className="h-screen flex items-start justify-center px-4 pt-16 pb-8 snap-start bg-foreground/5 overflow-y-auto">
+        <div className="text-center max-w-6xl w-full space-y-10 mt-8">
           <GitHubHeatmap username="CharlesBai-blc" />
 
           {/* Current Projects/Interests */}
@@ -115,12 +123,28 @@ export default function Home() {
             </h2>
             <div className="flex flex-wrap justify-center gap-4">
               {[
-                { title: 'Project 1', description: 'Placeholder description for project 1' },
-                { title: 'Project 2', description: 'Placeholder description for project 2' },
-                { title: 'Interest 1', description: 'Placeholder description for interest 1' },
-                { title: 'Interest 2', description: 'Placeholder description for interest 2' },
+                {
+                  title: "Project 1",
+                  description: "Placeholder description for project 1",
+                },
+                {
+                  title: "Project 2",
+                  description: "Placeholder description for project 2",
+                },
+                {
+                  title: "Interest 1",
+                  description: "Placeholder description for interest 1",
+                },
+                {
+                  title: "Interest 2",
+                  description: "Placeholder description for interest 2",
+                },
               ].map((item, index) => (
-                <ProjectBullet key={index} title={item.title} description={item.description} />
+                <ProjectBullet
+                  key={index}
+                  title={item.title}
+                  description={item.description}
+                />
               ))}
             </div>
           </div>

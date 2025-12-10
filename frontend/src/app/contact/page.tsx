@@ -21,6 +21,7 @@ export default function Contact() {
           <Link
             key={item.name}
             href={item.href}
+            prefetch={true}
             onMouseEnter={() => setHoveredButton(item.name)}
             onMouseLeave={() => setHoveredButton(null)}
             className={`
@@ -44,6 +45,7 @@ export default function Contact() {
       {/* Back Button */}
       <Link
         href="/"
+        prefetch={true}
         className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 hover:bg-white/30 transition-all duration-300 shadow-lg"
       >
         <span className="font-mono text-xs text-foreground opacity-80">cd ..</span>
