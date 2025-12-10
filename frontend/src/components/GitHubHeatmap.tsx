@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ContributionDay {
   date: string;
@@ -11,7 +11,9 @@ interface GitHubHeatmapProps {
   username?: string;
 }
 
-export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeatmapProps) {
+export default function GitHubHeatmap({
+  username = "your-username",
+}: GitHubHeatmapProps) {
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
   const [totalContributions, setTotalContributions] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -21,25 +23,46 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
     const fetchContributions = async () => {
       try {
         setLoading(true);
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
-        const response = await fetch(`${backendUrl}/api/github-contributions?username=${username}`);
+        setError(null);
+        const backendUrl =
+          process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
+
+        console.log(
+          "Fetching from:",
+          `${backendUrl}/api/github-contributions?username=${username}`
+        );
+
+        const response = await fetch(
+          `${backendUrl}/api/github-contributions?username=${username}`
+        );
 
         if (!response.ok) {
-          throw new Error('Failed to fetch contributions');
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(
+            errorData.error ||
+              `Failed to fetch contributions (${response.status})`
+          );
         }
 
         const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
         setContributions(data.contributions || []);
         setTotalContributions(data.total || 0);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load contributions');
-        console.error('Error fetching GitHub contributions:', err);
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to load contributions";
+        setError(errorMessage);
+        console.error("Error fetching GitHub contributions:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    if (username && username !== 'your-username') {
+    if (username && username !== "your-username") {
       fetchContributions();
     } else {
       setLoading(false);
@@ -62,7 +85,7 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
   let currentWeek: ContributionDay[] = [];
 
   contributions.forEach((day, index) => {
-    const date = new Date(day.date + 'T00:00:00'); // Add time to avoid timezone issues
+    const date = new Date(day.date + "T00:00:00"); // Add time to avoid timezone issues
     const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
 
     currentWeek.push(day);
@@ -82,19 +105,26 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
   if (loading) {
     return (
       <div className="text-center">
-        <p className="text-foreground opacity-50 font-light">loading contributions...</p>
+        <p className="text-foreground opacity-50 font-light">
+          loading contributions...
+        </p>
       </div>
     );
   }
 
-  if (error || username === 'your-username') {
+  if (error || username === "your-username") {
     return (
-      <div className="text-center">
+      <div className="text-center space-y-2">
         <p className="text-foreground opacity-50 font-light text-sm">
-          {username === 'your-username'
-            ? 'set your github username to view contributions'
-            : 'unable to load contributions'}
+          {username === "your-username"
+            ? "set your github username to view contributions"
+            : "unable to load contributions"}
         </p>
+        {error && (
+          <p className="text-foreground opacity-30 font-light text-xs font-mono">
+            {error}
+          </p>
+        )}
       </div>
     );
   }
@@ -117,9 +147,7 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
             <div key={weekIndex} className="flex flex-col gap-1">
               {week.map((day, dayIndex) => {
                 const intensity = getIntensity(day.contributionCount);
-                const opacity = intensity === 0
-                  ? 0.1
-                  : 0.2 + (intensity * 0.15);
+                const opacity = intensity === 0 ? 0.1 : 0.2 + intensity * 0.15;
 
                 return (
                   <div
@@ -136,20 +164,23 @@ export default function GitHubHeatmap({ username = 'your-username' }: GitHubHeat
 
         {/* Legend */}
         <div className="flex items-center gap-2 mt-4">
-          <span className="text-xs text-muted-foreground font-light font-mono">less</span>
+          <span className="text-xs text-muted-foreground font-light font-mono">
+            less
+          </span>
           <div className="flex gap-1">
             {[0, 1, 2, 3, 4].map((level) => (
               <div
                 key={level}
                 className="w-3 h-3 rounded-sm bg-foreground"
-                style={{ opacity: level === 0 ? 0.1 : 0.2 + (level * 0.15) }}
+                style={{ opacity: level === 0 ? 0.1 : 0.2 + level * 0.15 }}
               />
             ))}
           </div>
-          <span className="text-xs text-muted-foreground font-light font-mono">more</span>
+          <span className="text-xs text-muted-foreground font-light font-mono">
+            more
+          </span>
         </div>
       </div>
     </div>
   );
 }
-
