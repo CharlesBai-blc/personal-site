@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import GitHubHeatmap from "../components/GitHubHeatmap";
+import KintsugiBullet from "../components/KintsugiBullet";
 
 interface ProjectBulletProps {
   title: string;
@@ -19,19 +20,42 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <button className="px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg hover:bg-white/30 transition-all duration-300 shadow-lg text-left min-w-[200px]">
-        <div className="flex items-center gap-2">
-          <div
-            className={`w-2 h-2 rounded-full bg-foreground transition-all duration-300 ${
-              isHovered ? "scale-150" : ""
-            }`}
-          />
-          <span className="font-light text-foreground text-sm">{title}</span>
+      <button className="relative px-6 py-4 marble-kintsugi rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl text-left min-w-[220px] group/button">
+        {/* Marble background */}
+        <div className="absolute inset-0 marble-pattern opacity-40 group-hover/button:opacity-60 transition-opacity duration-500"></div>
+
+        {/* Kintsugi golden seams */}
+        <div className="absolute inset-0 kintsugi-seams opacity-0 group-hover/button:opacity-100 transition-opacity duration-500"></div>
+
+        {/* Content */}
+        <div className="relative z-10 flex items-center gap-3">
+          <div className="relative flex items-center justify-center">
+            <div
+              className={`transition-all duration-500 ${
+                isHovered ? "scale-125 drop-shadow-lg" : ""
+              }`}
+            >
+              <KintsugiBullet className="w-4 h-4" />
+            </div>
+            {isHovered && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-4 h-4 rounded-full bg-amber-300/30 animate-ping"></div>
+              </div>
+            )}
+          </div>
+          <span className="font-light text-foreground text-sm tracking-wide">
+            {title}
+          </span>
         </div>
       </button>
+
       {isHovered && (
-        <div className="absolute top-full left-0 mt-2 w-64 px-4 py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg shadow-lg z-10 pointer-events-none">
-          <p className="text-xs text-muted-foreground font-light leading-relaxed">
+        <div className="absolute top-full left-0 mt-3 w-72 px-5 py-4 marble-kintsugi rounded-lg shadow-xl z-10 pointer-events-none animate-in fade-in slide-in-from-top-2 duration-300">
+          {/* Marble background for tooltip */}
+          <div className="absolute inset-0 marble-pattern opacity-30 rounded-lg"></div>
+          {/* Kintsugi border */}
+          <div className="absolute inset-0 kintsugi-border rounded-lg"></div>
+          <p className="relative z-10 text-xs text-muted-foreground font-light leading-relaxed">
             {description}
           </p>
         </div>
@@ -65,7 +89,7 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       {/* Main Hero Section - Full Screen */}
       <section className="h-screen flex items-center justify-center px-4 relative snap-start">
         {/* Navigation - Top Right */}
