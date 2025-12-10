@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import GitHubHeatmap from "../components/GitHubHeatmap";
-import KintsugiBullet from "../components/KintsugiBullet";
+import CLINav from "../components/CLINav";
 
 interface ProjectBulletProps {
   title: string;
@@ -35,11 +33,11 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
                 isHovered ? "scale-125 drop-shadow-lg" : ""
               }`}
             >
-              <KintsugiBullet className="w-4 h-4" />
+              <div className="w-4 h-4 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 shadow-inner glassy-bullet"></div>
             </div>
             {isHovered && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-4 rounded-full bg-amber-300/30 animate-ping"></div>
+                <div className="w-4 h-4 rounded-full bg-white/40 backdrop-blur-sm animate-ping"></div>
               </div>
             )}
           </div>
@@ -65,60 +63,72 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
 }
 
 export default function Home() {
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
-  const router = useRouter();
+  const [currentPath, setCurrentPath] = useState("/main");
 
-  const navItems = [
-    { name: "about", href: "/about" },
-    { name: "portfolio", href: "/portfolio" },
-    { name: "blog", href: "/blog" },
-    { name: "contact", href: "/contact" },
-  ];
-
-  // Prefetch all pages on mount for instant navigation
+  // Track which section is visible for filepath indicator
   useEffect(() => {
-    navItems.forEach((item) => {
-      router.prefetch(item.href);
-    });
-  }, [router, navItems]);
+    const sections = [
+      { id: "hero", path: "/main" },
+      { id: "section1", path: "/projects" },
+      { id: "section2", path: "/archive" },
+    ];
 
-  // Prefetch on hover for faster navigation
-  const handleMouseEnter = (href: string, name: string) => {
-    setHoveredButton(name);
-    router.prefetch(href);
-  };
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // Trigger when section is 40% visible
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const section = sections.find((s) => s.id === entry.target.id);
+          if (section) {
+            setCurrentPath(section.path);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    // Observe all sections
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
 
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+      {/* Filepath Indicator - Top Left (Single, Updates on Scroll) */}
+      <div className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 shadow-lg pointer-events-none transition-all duration-300">
+        <span className="font-mono text-xs text-foreground opacity-80">
+          {currentPath}
+        </span>
+      </div>
+
       {/* Main Hero Section - Full Screen */}
-      <section className="h-screen flex items-center justify-center px-4 relative snap-start">
+      <section
+        id="hero"
+        className="h-screen flex items-center justify-center px-4 relative snap-start"
+      >
         {/* Navigation - Top Right */}
-        <nav className="fixed top-8 right-8 sm:top-10 sm:right-10 flex gap-8 z-50">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              prefetch={true}
-              onMouseEnter={() => handleMouseEnter(item.href, item.name)}
-              onMouseLeave={() => setHoveredButton(null)}
-              className={`
-                relative
-                font-light text-foreground
-                transition-all duration-300 ease-out
-                cursor-pointer
-                text-sm tracking-widest
-                lowercase
-                ${
-                  hoveredButton === item.name
-                    ? "opacity-100 scale-105"
-                    : "opacity-70 hover:opacity-90"
-                }
-              `}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+        <CLINav onSectionChange={setCurrentPath} />
 
         {/* Main Content */}
         <div className="text-center space-y-12 max-w-2xl">
@@ -151,7 +161,10 @@ export default function Home() {
       </section>
 
       {/* Section 1 */}
-      <section className="h-screen flex items-start justify-center px-4 pt-16 pb-8 snap-start bg-foreground/5 overflow-y-auto">
+      <section
+        id="section1"
+        className="h-screen flex items-start justify-center px-4 pt-16 pb-8 snap-start bg-foreground/5 overflow-y-auto relative"
+      >
         <div className="text-center max-w-6xl w-full space-y-10 mt-8">
           <GitHubHeatmap username="CharlesBai-blc" />
 
@@ -191,7 +204,10 @@ export default function Home() {
       </section>
 
       {/* Section 2 */}
-      <section className="h-screen flex items-center justify-center px-4 snap-start bg-foreground/10">
+      <section
+        id="section2"
+        className="h-screen flex items-center justify-center px-4 snap-start bg-foreground/10 relative"
+      >
         <div className="text-center max-w-4xl">
           {/* Empty section - placeholder */}
         </div>

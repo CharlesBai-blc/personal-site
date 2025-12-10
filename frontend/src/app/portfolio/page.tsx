@@ -1,93 +1,49 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import CLINav from "../../components/CLINav";
 
 export default function Portfolio() {
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const router = useRouter();
-
-  const navItems = [
-    { name: 'about', href: '/about' },
-    { name: 'portfolio', href: '/portfolio' },
-    { name: 'blog', href: '/blog' },
-    { name: 'contact', href: '/contact' },
-  ];
-
-  useEffect(() => {
-    navItems.forEach((item) => {
-      router.prefetch(item.href);
-    });
-    router.prefetch('/'); // Prefetch home page
-  }, [router, navItems]);
-
-  const handleMouseEnter = (href: string, name: string) => {
-    setHoveredButton(name);
-    router.prefetch(href);
-  };
 
   const projects = [
     {
-      title: 'E-commerce Platform',
-      description: 'Modern e-commerce solution with React, featuring real-time inventory management and seamless payment integration.',
-      tags: ['React', 'Next.js', 'TypeScript'],
+      title: "E-commerce Platform",
+      description:
+        "Modern e-commerce solution with React, featuring real-time inventory management and seamless payment integration.",
+      tags: ["React", "Next.js", "TypeScript"],
     },
     {
-      title: 'Design System',
-      description: 'Comprehensive design system for a SaaS platform, improving consistency and developer productivity across teams.',
-      tags: ['Design', 'Figma', 'React'],
+      title: "Design System",
+      description:
+        "Comprehensive design system for a SaaS platform, improving consistency and developer productivity across teams.",
+      tags: ["Design", "Figma", "React"],
     },
     {
-      title: 'Mobile Banking App',
-      description: 'Secure mobile banking application with biometric authentication and real-time transaction monitoring.',
-      tags: ['React Native', 'TypeScript', 'Security'],
+      title: "Mobile Banking App",
+      description:
+        "Secure mobile banking application with biometric authentication and real-time transaction monitoring.",
+      tags: ["React Native", "TypeScript", "Security"],
     },
     {
-      title: 'Analytics Dashboard',
-      description: 'Interactive data visualization dashboard with real-time metrics and customizable reporting features.',
-      tags: ['React', 'D3.js', 'Data Visualization'],
+      title: "Analytics Dashboard",
+      description:
+        "Interactive data visualization dashboard with real-time metrics and customizable reporting features.",
+      tags: ["React", "D3.js", "Data Visualization"],
     },
   ];
 
   return (
     <div className="min-h-screen relative">
       {/* Navigation - Top Right */}
-      <nav className="fixed top-8 right-8 sm:top-10 sm:right-10 flex gap-8 z-50">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            prefetch={true}
-            onMouseEnter={() => handleMouseEnter(item.href, item.name)}
-            onMouseLeave={() => setHoveredButton(null)}
-            className={`
-              relative
-              font-light text-foreground
-              transition-all duration-300 ease-out
-              cursor-pointer
-              text-sm tracking-widest
-              lowercase
-              ${hoveredButton === item.name
-                ? 'opacity-100 scale-105'
-                : 'opacity-70 hover:opacity-90'
-              }
-            `}
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
+      <CLINav />
 
-      {/* Back Button */}
-      <Link
-        href="/"
-        prefetch={true}
-        className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 hover:bg-white/30 transition-all duration-300 shadow-lg"
-      >
-        <span className="font-mono text-xs text-foreground opacity-80">cd ..</span>
-      </Link>
+      {/* Filepath Indicator - Top Left */}
+      <div className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 shadow-lg pointer-events-none transition-all duration-300">
+        <span className="font-mono text-xs text-foreground opacity-80">
+          /portfolio
+        </span>
+      </div>
 
       {/* Main Content */}
       <div className="min-h-screen flex items-center justify-center px-4 py-20">
@@ -112,7 +68,7 @@ export default function Portfolio() {
                 className={`
                   bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-6 shadow-lg
                   transition-all duration-300
-                  ${hoveredProject === index ? 'bg-white/30 scale-105' : ''}
+                  ${hoveredProject === index ? "bg-white/30 scale-105" : ""}
                 `}
               >
                 <h3 className="text-xl font-light text-foreground mb-3 font-display">
