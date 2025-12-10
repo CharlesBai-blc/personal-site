@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev: all",
+      "type": "npm",
+      "script": "dev",
+      "path": "${workspaceFolder}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "dev: frontend",
+      "type": "npm",
+      "script": "dev:frontend",
+      "path": "${workspaceFolder}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "dev: backend",
+      "type": "npm",
+      "script": "dev:backend",
+      "path": "${workspaceFolder}",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "build: all",
+      "type": "npm",
+      "script": "build",
+      "path": "${workspaceFolder}",
+      "problemMatcher": []
+    },
+    {
+      "label": "lint: frontend",
+      "type": "npm",
+      "script": "lint",
+      "path": "${workspaceFolder}/frontend",
+      "problemMatcher": ["$eslint-stylish"]
+    }
+  ]
+}
+

@@ -1,0 +1,21 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind CSS v4 custom variant directive. Define custom variants for utility classes."
+    },
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4 theme configuration directive. Configure design tokens and theme values."
+    },
+    {
+      "name": "@apply",
+      "description": "Tailwind CSS @apply directive. Apply utility classes within CSS rules."
+    },
+    {
+      "name": "@layer",
+      "description": "Tailwind CSS layer directive. Organize styles into base, components, or utilities layers."
+    }
+  ]
+}
