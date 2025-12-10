@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CLINav from "../../components/CLINav";
 
 export default function Contact() {
+  useEffect(() => {
+    document.title = "CB:\\site\\contact";
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

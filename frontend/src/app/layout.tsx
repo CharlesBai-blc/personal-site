@@ -16,8 +16,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "CB WIP",
-  description: "Welcome to my personal website. Discover my story, passions, and professional journey.",
+  title: "CB:\\site\\main",
+  description:
+    "Welcome to my personal website. Discover my story, passions, and professional journey.",
 };
 
 export default function RootLayout({
@@ -27,12 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${poppins.variable} antialiased`}
-      >
-        <main>
-          {children}
-        </main>
+      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+        <main>{children}</main>
       </body>
     </html>
   );

@@ -1,8 +1,13 @@
 "use client";
 
+import { useEffect } from "react";
 import CLINav from "../../components/CLINav";
 
 export default function About() {
+  useEffect(() => {
+    document.title = "CB:\\site\\about";
+  }, []);
+
   return (
     <div className="min-h-screen relative">
       {/* Navigation - Top Right */}

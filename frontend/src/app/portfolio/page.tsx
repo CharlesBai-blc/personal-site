@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CLINav from "../../components/CLINav";
 
 export default function Portfolio() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.title = "CB:\\site\\portfolio";
+  }, []);
 
   const projects = [
     {
