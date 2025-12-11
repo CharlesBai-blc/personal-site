@@ -182,20 +182,20 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4">
               {[
                 {
-                  title: "Project 1",
-                  description: "Placeholder description for project 1",
+                  title: "Stock Tracker",
+                  description: "A real-time stock tracking application that monitors market prices, tracks portfolio performance, and provides detailed analytics for informed investment decisions.",
                 },
                 {
                   title: "Project 2",
                   description: "Placeholder description for project 2",
                 },
                 {
-                  title: "Interest 1",
-                  description: "Placeholder description for interest 1",
+                  title: "Project 3",
+                  description: "Placeholder description for project 3",
                 },
                 {
-                  title: "Interest 2",
-                  description: "Placeholder description for interest 2",
+                  title: "Project 4",
+                  description: "Placeholder description for project 4",
                 },
               ].map((item, index) => (
                 <ProjectBullet
