@@ -248,11 +248,11 @@ export default function CLINav({ onSectionChange }: CLINavProps) {
                 bg-transparent
                 border-none
                 outline-none
-                w-44
+                w-52
                 transition-all duration-300
                 ${
                   isCliFocused
-                    ? "w-60 opacity-85"
+                    ? "w-64 opacity-85"
                     : "opacity-70 hover:opacity-85"
                 }
               `}
