@@ -7,10 +7,42 @@ import CLINav from "../components/CLINav";
 interface ProjectBulletProps {
   title: string;
   description: string;
+  link?: string;
 }
 
-function ProjectBullet({ title, description }: ProjectBulletProps) {
+function ProjectBullet({ title, description, link }: ProjectBulletProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const content = (
+    <div className="relative px-6 py-4 marble-kintsugi rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl text-left min-w-[220px] group/button">
+      {/* Marble background */}
+      <div className="absolute inset-0 marble-pattern opacity-40 group-hover/button:opacity-60 transition-opacity duration-500"></div>
+
+      {/* Kintsugi golden seams */}
+      <div className="absolute inset-0 kintsugi-seams opacity-0 group-hover/button:opacity-100 transition-opacity duration-500"></div>
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center gap-3">
+        <div className="relative flex items-center justify-center">
+          <div
+            className={`transition-all duration-500 ${
+              isHovered ? "scale-125 drop-shadow-lg" : ""
+            }`}
+          >
+            <div className="w-4 h-4 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 shadow-inner glassy-bullet"></div>
+          </div>
+          {isHovered && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-4 h-4 rounded-full bg-white/40 backdrop-blur-sm animate-ping"></div>
+            </div>
+          )}
+        </div>
+        <span className="font-light text-foreground text-sm tracking-wide">
+          {title}
+        </span>
+      </div>
+    </div>
+  );
 
   return (
     <div
@@ -18,34 +50,18 @@ function ProjectBullet({ title, description }: ProjectBulletProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <button className="relative px-6 py-4 marble-kintsugi rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl text-left min-w-[220px] group/button">
-        {/* Marble background */}
-        <div className="absolute inset-0 marble-pattern opacity-40 group-hover/button:opacity-60 transition-opacity duration-500"></div>
-
-        {/* Kintsugi golden seams */}
-        <div className="absolute inset-0 kintsugi-seams opacity-0 group-hover/button:opacity-100 transition-opacity duration-500"></div>
-
-        {/* Content */}
-        <div className="relative z-10 flex items-center gap-3">
-          <div className="relative flex items-center justify-center">
-            <div
-              className={`transition-all duration-500 ${
-                isHovered ? "scale-125 drop-shadow-lg" : ""
-              }`}
-            >
-              <div className="w-4 h-4 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 shadow-inner glassy-bullet"></div>
-            </div>
-            {isHovered && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-4 rounded-full bg-white/40 backdrop-blur-sm animate-ping"></div>
-              </div>
-            )}
-          </div>
-          <span className="font-light text-foreground text-sm tracking-wide">
-            {title}
-          </span>
-        </div>
-      </button>
+      {link ? (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          {content}
+        </a>
+      ) : (
+        <button className="w-full">{content}</button>
+      )}
 
       {isHovered && (
         <div className="absolute top-full left-0 mt-3 w-72 px-5 py-4 marble-kintsugi rounded-lg shadow-xl z-10 pointer-events-none animate-in fade-in slide-in-from-top-2 duration-300">
@@ -186,8 +202,9 @@ export default function Home() {
                   description: "A real-time stock tracking application that monitors market prices, tracks portfolio performance, and provides detailed analytics for informed investment decisions.",
                 },
                 {
-                  title: "Project 2",
-                  description: "Placeholder description for project 2",
+                  title: "Toolbox",
+                  description: "A comprehensive codex and learning platform for developers to master Data Structures & Algorithms. Features an in-browser code sandbox hosted on AWS, enabling hands-on practice with interactive coding challenges and real-time execution.",
+                  link: "https://toolbox.charles-bai.com",
                 },
                 {
                   title: "Project 3",
@@ -202,6 +219,7 @@ export default function Home() {
                   key={index}
                   title={item.title}
                   description={item.description}
+                  link={item.link}
                 />
               ))}
             </div>
