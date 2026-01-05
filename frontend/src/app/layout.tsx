@@ -16,9 +16,14 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "CB:\\site\\main",
+  title: "CBai",
   description:
     "Welcome to my personal website. Discover my story, passions, and professional journey.",
+  icons: {
+    icon: [{ url: "/cblogo.png", type: "image/png" }],
+    apple: [{ url: "/cblogo.png", type: "image/png" }],
+    shortcut: "/cblogo.png",
+  },
 };
 
 export default function RootLayout({

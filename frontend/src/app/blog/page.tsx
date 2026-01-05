@@ -1,14 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CLINav from "../../components/CLINav";
 
 export default function Blog() {
   const [hoveredPost, setHoveredPost] = useState<number | null>(null);
-
-  useEffect(() => {
-    document.title = "CB:\\site\\blog";
-  }, []);
 
   const posts = [
     {

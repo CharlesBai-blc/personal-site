@@ -81,12 +81,6 @@ function ProjectBullet({ title, description, link }: ProjectBulletProps) {
 export default function Home() {
   const [currentPath, setCurrentPath] = useState("/main");
 
-  // Update page title based on current path
-  useEffect(() => {
-    const pathName = currentPath.replace("/", ""); // Remove leading slash
-    document.title = `CB:\\site\\${pathName}`;
-  }, [currentPath]);
-
   // Track which section is visible for filepath indicator
   useEffect(() => {
     const sections = [
