@@ -33,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/cblogo.png" />
+      </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
         <main>{children}</main>
       </body>
