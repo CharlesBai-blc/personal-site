@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Nav from "../../components/Nav";
+import Logo from "../../components/Logo";
 
 export default function Portfolio() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -35,6 +36,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen relative">
+      <Logo />
       <Nav />
 
       <div className="min-h-screen flex items-center justify-center px-4 py-20">

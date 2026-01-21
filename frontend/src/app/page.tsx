@@ -3,6 +3,7 @@
 import { useState } from "react";
 import GitHubHeatmap from "../components/GitHubHeatmap";
 import Nav from "../components/Nav";
+import Logo from "../components/Logo";
 
 interface ProjectBulletProps {
   title: string;
@@ -81,6 +82,7 @@ function ProjectBullet({ title, description, link }: ProjectBulletProps) {
 export default function Home() {
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+      <Logo />
       <Nav />
 
       {/* Main Hero Section - Full Screen */}
