@@ -27,11 +27,6 @@ export default function GitHubHeatmap({
         const backendUrl =
           process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
 
-        console.log(
-          "Fetching from:",
-          `${backendUrl}/api/github-contributions?username=${username}`
-        );
-
         const response = await fetch(
           `${backendUrl}/api/github-contributions?username=${username}`
         );

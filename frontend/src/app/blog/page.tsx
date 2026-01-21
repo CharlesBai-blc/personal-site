@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import CLINav from "../../components/CLINav";
+import Nav from "../../components/Nav";
 
 export default function Blog() {
   const [hoveredPost, setHoveredPost] = useState<number | null>(null);
@@ -39,20 +39,10 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Navigation - Top Right */}
-      <CLINav />
+      <Nav />
 
-      {/* Filepath Indicator - Top Left */}
-      <div className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 shadow-lg pointer-events-none transition-all duration-300">
-        <span className="font-mono text-xs text-foreground opacity-80">
-          /blog
-        </span>
-      </div>
-
-      {/* Main Content */}
       <div className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-3xl mx-auto space-y-12 w-full">
-          {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-5xl sm:text-6xl font-light text-foreground font-display tracking-tight">
               blog
@@ -62,7 +52,6 @@ export default function Blog() {
             </p>
           </div>
 
-          {/* Blog Posts */}
           <div className="space-y-6">
             {posts.map((post, index) => (
               <div

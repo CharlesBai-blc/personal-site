@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import CLINav from "../../components/CLINav";
+import Nav from "../../components/Nav";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -53,14 +52,12 @@ export default function Contact() {
       [name]: value,
     }));
 
-    // Real-time validation
     const error = validateField(name, value);
     setFieldErrors((prev) => ({
       ...prev,
       [name]: error,
     }));
 
-    // Clear status when user starts typing
     if (submitStatus.type) {
       setSubmitStatus({ type: null, message: "" });
     }
@@ -88,12 +85,10 @@ export default function Contact() {
         throw new Error(data.error || "Failed to send message");
       }
 
-      // Success
       setSubmitStatus({
         type: "success",
         message: "Message sent successfully! I'll get back to you soon.",
       });
-      // Reset form
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       setSubmitStatus({
@@ -110,20 +105,10 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Navigation - Top Right */}
-      <CLINav />
+      <Nav />
 
-      {/* Filepath Indicator - Top Left */}
-      <div className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 shadow-lg pointer-events-none transition-all duration-300">
-        <span className="font-mono text-xs text-foreground opacity-80">
-          /contact
-        </span>
-      </div>
-
-      {/* Main Content */}
       <div className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-2xl mx-auto space-y-12 w-full">
-          {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-5xl sm:text-6xl font-light text-foreground font-display tracking-tight">
               contact
@@ -133,10 +118,8 @@ export default function Contact() {
             </p>
           </div>
 
-          {/* Contact Form */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-8 shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field */}
               <div className="relative">
                 <label
                   htmlFor="name"
@@ -171,7 +154,6 @@ export default function Contact() {
                 )}
               </div>
 
-              {/* Email Field */}
               <div className="relative">
                 <label
                   htmlFor="email"
@@ -206,7 +188,6 @@ export default function Contact() {
                 )}
               </div>
 
-              {/* Message Field */}
               <div className="relative">
                 <div className="flex items-center justify-between mb-2">
                   <label
@@ -253,7 +234,6 @@ export default function Contact() {
                 )}
               </div>
 
-              {/* Status Message */}
               {submitStatus.type && (
                 <div
                   className={`p-4 rounded-lg text-sm font-light animate-in fade-in slide-in-from-top-2 duration-300 ${
@@ -296,7 +276,6 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Contact Info */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-8 shadow-lg">
             <h2 className="text-xl font-light text-foreground mb-6 font-display">
               find me

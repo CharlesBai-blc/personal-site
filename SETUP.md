@@ -32,19 +32,23 @@
 
 ## Project Structure
 
-- `frontend/` - Next.js application (React frontend)
-- `backend/` - Express.js API server
-- Root `package.json` - Scripts to manage both projects
+```
+psite/
+├── frontend/     # Next.js frontend application
+│   └── src/
+│       ├── app/          # Pages and layouts
+│       └── components/   # Reusable components
+├── backend/      # Express.js backend API
+│   └── src/
+│       ├── routes/       # API routes
+│       └── server.ts     # Express server
+└── package.json  # Root package.json with scripts
+```
 
-## Migration Notes
+## GitHub Token
 
-The original `src/` folder is still present. Once you've verified everything works with the new structure, you can delete:
-- `src/` folder (all files moved to `frontend/src/`)
-- Root `package.json` dependencies (moved to `frontend/package.json`)
+To enable the GitHub contributions heatmap:
 
-## Next Steps
-
-1. Test that both servers start correctly
-2. Verify the GitHub contributions API works
-3. Once confirmed, you can remove the old `src/` folder
-
+1. Go to https://github.com/settings/tokens
+2. Generate a new token (classic) with `public_repo` scope
+3. Add it to `backend/.env` as `GITHUB_TOKEN`

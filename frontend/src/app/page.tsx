@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import GitHubHeatmap from "../components/GitHubHeatmap";
-import CLINav from "../components/CLINav";
+import Nav from "../components/Nav";
 
 interface ProjectBulletProps {
   title: string;
@@ -79,73 +79,15 @@ function ProjectBullet({ title, description, link }: ProjectBulletProps) {
 }
 
 export default function Home() {
-  const [currentPath, setCurrentPath] = useState("/main");
-
-  // Track which section is visible for filepath indicator
-  useEffect(() => {
-    const sections = [
-      { id: "hero", path: "/main" },
-      { id: "section1", path: "/projects" },
-      { id: "section2", path: "/archive" },
-    ];
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "-40% 0px -40% 0px", // Trigger when section is 40% visible
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const section = sections.find((s) => s.id === entry.target.id);
-          if (section) {
-            setCurrentPath(section.path);
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
-
-    // Observe all sections
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-    };
-  }, []);
-
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
-      {/* Filepath Indicator - Top Left (Single, Updates on Scroll) */}
-      <div className="fixed top-6 left-6 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-4 py-2 shadow-lg pointer-events-none transition-all duration-300">
-        <span className="font-mono text-xs text-foreground opacity-80">
-          {currentPath}
-        </span>
-      </div>
+      <Nav />
 
       {/* Main Hero Section - Full Screen */}
       <section
         id="hero"
         className="h-screen flex items-center justify-center px-4 relative snap-start"
       >
-        {/* Navigation - Top Right */}
-        <CLINav onSectionChange={setCurrentPath} />
-
         {/* Main Content */}
         <div className="text-center space-y-12 max-w-2xl">
           <div className="space-y-4">
