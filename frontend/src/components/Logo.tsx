@@ -13,9 +13,8 @@ export default function Logo() {
         <Image
           src="/cblogo.png"
           alt="CBai Logo"
-          width={60}
+          width={40}
           height={40}
-          className="w-10 h-10"
           priority
         />
       </div>
