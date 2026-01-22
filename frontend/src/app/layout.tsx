@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   description:
     "Welcome to my personal website. Discover my story, passions, and professional journey.",
   icons: {
-    icon: [{ url: "/cblogo.png", type: "image/png" }],
-    apple: [{ url: "/cblogo.png", type: "image/png" }],
-    shortcut: "/cblogo.png",
+    icon: [{ url: "/cblogobw.png", type: "image/png" }],
+    apple: [{ url: "/cblogobw.png", type: "image/png" }],
+    shortcut: "/cblogobw.png",
   },
 };
 
