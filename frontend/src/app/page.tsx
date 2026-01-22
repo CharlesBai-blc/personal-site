@@ -93,7 +93,7 @@ function ProjectBullet({ title, description, link }: ProjectBulletProps) {
             </div>
           )}
         </div>
-        <span className="font-light text-foreground text-sm tracking-wide">
+        <span className="font-light text-white text-sm tracking-wide">
           {title}
         </span>
       </div>
@@ -125,7 +125,7 @@ function ProjectBullet({ title, description, link }: ProjectBulletProps) {
           <div className="absolute inset-0 marble-pattern opacity-30 rounded-lg"></div>
           {/* Kintsugi border */}
           <div className="absolute inset-0 kintsugi-border rounded-lg"></div>
-          <p className="relative z-10 text-xs text-muted-foreground font-light leading-relaxed">
+          <p className="relative z-10 text-xs text-white/90 font-light leading-relaxed">
             {description}
           </p>
         </div>
@@ -158,7 +158,7 @@ export default function Home() {
           <NavItem label="blog" href="/blog" delay="700ms" isLoaded={isLoaded} />
           <NavItem label="contact" href="/contact" delay="800ms" isLoaded={isLoaded} />
         </div>
-      </nav>
+        </nav>
 
       {/* Location Info - Top Right */}
       <div className="fixed top-6 right-6 z-50 text-right" style={{ top: '1.5rem', right: '2.25rem' }}>
@@ -249,7 +249,7 @@ export default function Home() {
               transformOrigin: "bottom center",
               transitionDelay: "450ms",
             }}
-          />
+            />
         </div>
 
         {/* Content overlay */}
@@ -296,7 +296,7 @@ export default function Home() {
                 />
               ))}
             </div>
-          </div>
+        </div>
         </div>
       </section>
     </div>

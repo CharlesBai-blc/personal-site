@@ -100,7 +100,7 @@ export default function GitHubHeatmap({
   if (loading) {
     return (
       <div className="text-center">
-        <p className="text-foreground opacity-50 font-light">
+        <p className="text-white/50 font-light">
           loading contributions...
         </p>
       </div>
@@ -110,13 +110,13 @@ export default function GitHubHeatmap({
   if (error || username === "your-username") {
     return (
       <div className="text-center space-y-2">
-        <p className="text-foreground opacity-50 font-light text-sm">
+        <p className="text-white/50 font-light text-sm">
           {username === "your-username"
             ? "set your github username to view contributions"
             : "unable to load contributions"}
         </p>
         {error && (
-          <p className="text-foreground opacity-30 font-light text-xs font-mono">
+          <p className="text-white/30 font-light text-xs font-mono">
             {error}
           </p>
         )}
@@ -127,10 +127,10 @@ export default function GitHubHeatmap({
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
-        <h2 className="text-3xl font-light text-foreground font-display tracking-tight">
+        <h2 className="text-3xl font-light text-white font-display tracking-tight">
           contributions
         </h2>
-        <p className="text-sm text-muted-foreground font-light">
+        <p className="text-sm text-white/70 font-light">
           {totalContributions} contributions in the last year
         </p>
       </div>
@@ -147,7 +147,7 @@ export default function GitHubHeatmap({
                 return (
                   <div
                     key={`${day.date}-${dayIndex}`}
-                    className="w-3 h-3 rounded-sm bg-foreground transition-all hover:scale-110"
+                    className="w-3 h-3 rounded-sm bg-white transition-all hover:scale-110"
                     style={{ opacity }}
                     title={`${day.date}: ${day.contributionCount} contributions`}
                   />
@@ -159,19 +159,19 @@ export default function GitHubHeatmap({
 
         {/* Legend */}
         <div className="flex items-center gap-2 mt-4">
-          <span className="text-xs text-muted-foreground font-light font-mono">
+          <span className="text-xs text-white/70 font-light font-mono">
             less
           </span>
           <div className="flex gap-1">
             {[0, 1, 2, 3, 4].map((level) => (
               <div
                 key={level}
-                className="w-3 h-3 rounded-sm bg-foreground"
+                className="w-3 h-3 rounded-sm bg-white"
                 style={{ opacity: level === 0 ? 0.1 : 0.2 + level * 0.15 }}
               />
             ))}
           </div>
-          <span className="text-xs text-muted-foreground font-light font-mono">
+          <span className="text-xs text-white/70 font-light font-mono">
             more
           </span>
         </div>
