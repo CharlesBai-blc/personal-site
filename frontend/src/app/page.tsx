@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen overflow-y-scroll">
-      <Logo />
+      <Logo isLoaded={isLoaded} delay="500ms" />
       <CenteredNav isLoaded={isLoaded} />
       <LocationInfo isLoaded={isLoaded} />
       <SocialLinks isLoaded={isLoaded} />

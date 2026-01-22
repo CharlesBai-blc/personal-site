@@ -52,7 +52,18 @@ export default function HeroSection({
 
       {/* Content overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        {/* Content will go here */}
+        <div
+          className="absolute top-2/5 -translate-y-1/2"
+          style={{
+            left: "55%",
+            fontFamily: "var(--font-space-mono)",
+          }}
+        >
+          <div className="text-black font-bold uppercase leading-tight">
+            <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl">CHARLES</div>
+            <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl">BAI</div>
+          </div>
+        </div>
       </div>
     </section>
   );
