@@ -24,7 +24,7 @@ export default function SocialLinks({
   return (
     <div
       className="fixed bottom-6 left-6 z-50 flex flex-col gap-4"
-      style={{ bottom: "3.25rem", left: "1.5rem" }}
+      style={{ bottom: "4rem", left: "2rem" }}
     >
       {SOCIAL_LINKS.map((link, index) => (
         <SocialLink

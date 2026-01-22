@@ -31,7 +31,7 @@ export default function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "flex items-center gap-2 transition-all duration-1000 ease-out",
+        "flex items-center gap-2 transition-all duration-1000 ease-out group",
         isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
       )}
       style={{ transitionDelay: delay }}
@@ -42,7 +42,24 @@ export default function SocialLink({
       >
         {label}
       </span>
-      <Image src="/arrowtr.svg" alt="" width={12} height={12} />
+      <div className="relative w-3 h-3 overflow-hidden">
+        {/* Arrow that moves up-right on hover */}
+        <Image
+          src="/arrowtr.svg"
+          alt=""
+          width={12}
+          height={12}
+          className="transition-transform duration-500 ease-out group-hover:translate-x-full group-hover:-translate-y-full"
+        />
+        {/* Arrow that comes from bottom-right on hover */}
+        <Image
+          src="/arrowtr.svg"
+          alt=""
+          width={12}
+          height={12}
+          className="absolute inset-0 transition-transform duration-500 ease-out -translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"
+        />
+      </div>
     </a>
   );
 }
