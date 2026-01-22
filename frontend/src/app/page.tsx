@@ -142,8 +142,8 @@ export default function Home() {
   }, []);
 
   const socialLinks = [
-    { label: "LINKEDIN", href: "https://linkedin.com" },
-    { label: "GITHUB", href: "https://github.com" },
+    { label: "LINKEDIN", href: "https://www.linkedin.com/in/charles-bai06" },
+    { label: "GITHUB", href: "https://github.com/CharlesBai-blc" },
   ];
 
   return (
