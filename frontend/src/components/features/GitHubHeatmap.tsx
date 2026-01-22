@@ -11,6 +11,14 @@ interface GitHubHeatmapProps {
   username?: string;
 }
 
+/**
+ * GitHubHeatmap Component
+ * Displays GitHub contribution heatmap
+ *
+ * Reasons for features folder:
+ * 1. Feature component: Implements a specific feature (GitHub contributions visualization) with API calls
+ * 2. Separation: Distinguishes feature components (with business logic) from generic UI components
+ */
 export default function GitHubHeatmap({
   username = "your-username",
 }: GitHubHeatmapProps) {

@@ -1,5 +1,5 @@
-import Nav from "../../components/Nav";
-import Logo from "../../components/Logo";
+import Nav from "@/components/layout/Nav";
+import Logo from "@/components/layout/Logo";
 
 export default function About() {
   return (

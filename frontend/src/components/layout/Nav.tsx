@@ -2,21 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NAV_LINKS } from "@/config/navigation";
 
-const LINKS: Array<{ href: string; label: string }> = [
-  { href: "/about", label: "about" },
-  { href: "/portfolio", label: "portfolio" },
-  { href: "/blog", label: "blog" },
-  { href: "/contact", label: "contact" },
-];
-
+/**
+ * Nav Component
+ * Right-aligned navigation bar used on content pages
+ *
+ * Reasons for layout folder:
+ * 1. Layout component: Used across multiple pages (about, blog, contact, portfolio) as part of site layout
+ * 2. Consistency: Groups navigation components together (Nav, CenteredNav) for better organization
+ */
 export default function Nav() {
   const pathname = usePathname();
 
   return (
     <nav className="fixed top-6 right-6 z-50">
       <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg px-3 py-2 shadow-lg">
-        {LINKS.map((l) => {
+        {NAV_LINKS.map((l) => {
           const isActive = pathname === l.href;
           return (
             <Link
@@ -37,4 +39,3 @@ export default function Nav() {
     </nav>
   );
 }
-
