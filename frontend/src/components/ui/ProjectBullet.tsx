@@ -1,6 +1,6 @@
 /**
  * ProjectBullet Component
- * Displays project information with hover tooltip and kintsugi styling
+ * Displays project information with hover tooltip
  *
  * Reasons for separate file:
  * 1. Complexity: Contains state management, hover interactions, and complex styling
@@ -25,12 +25,7 @@ export default function ProjectBullet({
   const [isHovered, setIsHovered] = useState(false);
 
   const content = (
-    <div className="relative px-6 py-4 marble-kintsugi rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl text-left min-w-[220px] group/button">
-      {/* Marble background */}
-      <div className="absolute inset-0 marble-pattern opacity-40 group-hover/button:opacity-60 transition-opacity duration-500"></div>
-
-      {/* Kintsugi golden seams */}
-      <div className="absolute inset-0 kintsugi-seams opacity-0 group-hover/button:opacity-100 transition-opacity duration-500"></div>
+    <div className="relative px-6 py-4 project-card rounded-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl text-left min-w-[220px] group/button">
 
       {/* Content */}
       <div className="relative z-10 flex items-center gap-3">
@@ -75,11 +70,7 @@ export default function ProjectBullet({
       )}
 
       {isHovered && (
-        <div className="absolute top-full left-0 mt-3 w-72 px-5 py-4 marble-kintsugi rounded-lg shadow-xl z-10 pointer-events-none animate-in fade-in slide-in-from-top-2 duration-300">
-          {/* Marble background for tooltip */}
-          <div className="absolute inset-0 marble-pattern opacity-30 rounded-lg"></div>
-          {/* Kintsugi border */}
-          <div className="absolute inset-0 kintsugi-border rounded-lg"></div>
+        <div className="absolute top-full left-0 mt-3 w-72 px-5 py-4 project-card rounded-lg shadow-xl z-10 pointer-events-none animate-in fade-in slide-in-from-top-2 duration-300">
           <p className="relative z-10 text-xs text-white/90 font-light leading-relaxed">
             {description}
           </p>
