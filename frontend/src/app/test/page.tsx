@@ -1,18 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import Logo from "../../components/Logo";
 
 interface NavItemProps {
   label: string;
+  href: string;
   delay: string;
   isLoaded: boolean;
 }
 
-function NavItem({ label, delay, isLoaded }: NavItemProps) {
+function NavItem({ label, href, delay, isLoaded }: NavItemProps) {
   return (
-    <div
-      className={`relative overflow-hidden cursor-pointer transition-all duration-1000 ease-out ${
+    <Link
+      href={href}
+      className={`relative overflow-hidden cursor-pointer transition-all duration-1000 ease-out block ${
         isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"
       }`}
       style={{ transitionDelay: delay }}
@@ -25,7 +29,33 @@ function NavItem({ label, delay, isLoaded }: NavItemProps) {
           {label}
         </div>
       </div>
-    </div>
+    </Link>
+  );
+}
+
+interface SocialLinkProps {
+  label: string;
+  href: string;
+  delay: string;
+  isLoaded: boolean;
+}
+
+function SocialLink({ label, href, delay, isLoaded }: SocialLinkProps) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex items-center gap-2 transition-all duration-1000 ease-out ${
+        isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+      }`}
+      style={{ transitionDelay: delay }}
+    >
+      <span className="text-xs text-white font-mono font-bold uppercase" style={{ fontFamily: 'var(--font-space-mono)' }}>
+        {label}
+      </span>
+      <Image src="/arrowtr.svg" alt="" width={12} height={12} />
+    </a>
   );
 }
 
@@ -36,6 +66,11 @@ export default function TestPage() {
     setIsLoaded(true);
   }, []);
 
+  const socialLinks = [
+    { label: "LINKEDIN", href: "https://linkedin.com" },
+    { label: "GITHUB", href: "https://github.com" },
+  ];
+
   return (
     <div className="min-h-screen overflow-y-scroll">
       <Logo />
@@ -43,10 +78,10 @@ export default function TestPage() {
       {/* Centered Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
         <div className="flex items-center gap-16">
-          <NavItem label="about" delay="500ms" isLoaded={isLoaded} />
-          <NavItem label="portfolio" delay="600ms" isLoaded={isLoaded} />
-          <NavItem label="blog" delay="700ms" isLoaded={isLoaded} />
-          <NavItem label="contact" delay="800ms" isLoaded={isLoaded} />
+          <NavItem label="about" href="/about" delay="500ms" isLoaded={isLoaded} />
+          <NavItem label="portfolio" href="/portfolio" delay="600ms" isLoaded={isLoaded} />
+          <NavItem label="blog" href="/blog" delay="700ms" isLoaded={isLoaded} />
+          <NavItem label="contact" href="/contact" delay="800ms" isLoaded={isLoaded} />
         </div>
       </nav>
 
@@ -70,6 +105,19 @@ export default function TestPage() {
             FREDERICK, MD
           </div>
         </div>
+      </div>
+
+      {/* Social Links - Bottom Left */}
+      <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-4" style={{ bottom: '3.25rem', left: '1.5rem' }}>
+        {socialLinks.map((link, index) => (
+          <SocialLink
+            key={link.label}
+            label={link.label}
+            href={link.href}
+            delay={`${1200 + index * 100}ms`}
+            isLoaded={isLoaded}
+          />
+        ))}
       </div>
 
       {/* Hero Section - Full Screen with Blinds Animation */}
@@ -132,11 +180,12 @@ export default function TestPage() {
         {/* Content overlay - can be added later */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
           {/* Content will go here */}
+          Charles
         </div>
       </section>
 
       {/* Additional scrollable content sections */}
-      <section className="min-h-screen flex items-center justify-center px-4 bg-foreground/5">
+      <section className="min-h-screen flex items-center justify-center px-4 bg-black">
         <div className="text-center max-w-4xl">
           <h2 className="text-4xl font-light text-foreground font-display tracking-tight mb-4">
             Scroll to see more
