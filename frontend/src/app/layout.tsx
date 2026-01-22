@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,8 +15,15 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "CBai",
+  title: "Charles Bai",
   description:
     "Welcome to my personal website. Discover my story, passions, and professional journey.",
   icons: {
@@ -36,7 +43,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/cblogo.png" />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+      <body className={`${inter.variable} ${poppins.variable} ${spaceMono.variable} antialiased`}>
         <main>{children}</main>
       </body>
     </html>
