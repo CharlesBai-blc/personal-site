@@ -14,9 +14,10 @@ import { NAV_LINKS, NAV_ANIMATION_DELAYS } from "@/config/navigation";
 
 interface CenteredNavProps {
   isLoaded: boolean;
+  textColor?: "black" | "white";
 }
 
-export default function CenteredNav({ isLoaded }: CenteredNavProps) {
+export default function CenteredNav({ isLoaded, textColor = "black" }: CenteredNavProps) {
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
       <div className="flex items-center gap-16">
@@ -31,6 +32,7 @@ export default function CenteredNav({ isLoaded }: CenteredNavProps) {
               ] || "500ms"
             }
             isLoaded={isLoaded}
+            textColor={textColor}
           />
         ))}
       </div>

@@ -14,21 +14,28 @@ import { cn } from "@/lib/utils";
 interface LocationInfoProps {
   isLoaded: boolean;
   delay?: string;
+  textColor?: "black" | "white";
 }
 
 const LOCATIONS = ["ITHACA, NY", "FREDERICK, MD"];
 
 export default function LocationInfo({
   isLoaded,
-  delay = "1000ms",
+  delay = "50ms",
+  textColor = "black",
 }: LocationInfoProps) {
+  const textColorClass = textColor === "white" ? "text-white" : "text-black";
+
   return (
     <div
       className="fixed top-6 right-6 z-50 text-right"
       style={{ top: "1.5rem", right: "2.25rem" }}
     >
       <div
-        className="text-xs text-black font-mono font-bold uppercase leading-relaxed"
+        className={cn(
+          "text-xs font-mono font-bold uppercase leading-relaxed transition-colors duration-100",
+          textColorClass
+        )}
         style={{ fontFamily: "var(--font-space-mono)" }}
       >
         {LOCATIONS.map((location) => (

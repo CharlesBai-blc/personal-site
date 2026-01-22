@@ -15,9 +15,10 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   isLoaded?: boolean;
   delay?: string;
+  isScrolled?: boolean;
 }
 
-export default function Logo({ isLoaded = true, delay = "500ms" }: LogoProps) {
+export default function Logo({ isLoaded = true, delay = "500ms", isScrolled = false }: LogoProps) {
   return (
     <Link
       href="/"
@@ -27,13 +28,32 @@ export default function Logo({ isLoaded = true, delay = "500ms" }: LogoProps) {
       )}
       style={{ transitionDelay: delay }}
     >
-      <Image
-        src="/cblogoblack.png"
-        alt="CBai Logo"
-        width={40}
-        height={40}
-        priority
-      />
+      <div className="relative w-10 h-10">
+        {/* Black logo - visible when not scrolled */}
+        <Image
+          src="/cblogoblack.png"
+          alt="CBai Logo"
+          width={40}
+          height={40}
+          priority
+          className={cn(
+            "absolute inset-0 transition-opacity duration-300",
+            isScrolled ? "opacity-0" : "opacity-100"
+          )}
+        />
+        {/* White logo - visible when scrolled */}
+        <Image
+          src="/cblogobw.png"
+          alt="CBai Logo"
+          width={40}
+          height={40}
+          priority
+          className={cn(
+            "absolute inset-0 transition-opacity duration-300",
+            isScrolled ? "opacity-100" : "opacity-0"
+          )}
+        />
+      </div>
     </Link>
   );
 }

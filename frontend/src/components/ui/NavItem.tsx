@@ -17,9 +17,12 @@ interface NavItemProps {
   href: string;
   delay: string;
   isLoaded: boolean;
+  textColor?: "black" | "white";
 }
 
-export default function NavItem({ label, href, delay, isLoaded }: NavItemProps) {
+export default function NavItem({ label, href, delay, isLoaded, textColor = "black" }: NavItemProps) {
+  const textColorClass = textColor === "white" ? "text-white" : "text-black";
+
   return (
     <Link
       href={href}
@@ -31,13 +34,19 @@ export default function NavItem({ label, href, delay, isLoaded }: NavItemProps) 
     >
       <div className="group">
         <div
-          className="text-sm text-black font-mono font-bold uppercase transition-transform duration-500 ease-out group-hover:-translate-y-full"
+          className={cn(
+            "text-sm font-mono font-bold uppercase transition-all duration-500 ease-out group-hover:-translate-y-full",
+            textColorClass
+          )}
           style={{ fontFamily: "var(--font-space-mono)" }}
         >
           {label}
         </div>
         <div
-          className="text-sm text-black font-mono font-bold uppercase transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0 absolute inset-0"
+          className={cn(
+            "text-sm font-mono font-bold uppercase transition-all duration-500 ease-out translate-y-full group-hover:translate-y-0 absolute inset-0",
+            textColorClass
+          )}
           style={{ fontFamily: "var(--font-space-mono)" }}
         >
           {label}
