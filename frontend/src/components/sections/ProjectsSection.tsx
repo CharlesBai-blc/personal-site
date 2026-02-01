@@ -28,7 +28,7 @@ export default function ProjectsSection({
         {/* Current Projects/Interests */}
         <div className="space-y-6">
           <h2 className="text-3xl font-light text-white font-display tracking-tight">
-            current projects / interests
+            what i&apos;ve been up to
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
             {PROJECTS.map((project, index) => (

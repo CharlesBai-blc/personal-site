@@ -136,7 +136,7 @@ export default function GitHubHeatmap({
     <div className="space-y-6">
       <div className="text-center space-y-2">
         <h2 className="text-3xl font-light text-white font-display tracking-tight">
-          contributions
+          locked in?
         </h2>
         <p className="text-sm text-white/70 font-light">
           {totalContributions} contributions in the last year

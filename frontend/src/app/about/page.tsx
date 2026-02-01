@@ -21,9 +21,10 @@ export default function About() {
           <div className="space-y-8">
             <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-8 shadow-lg">
               <p className="text-foreground leading-relaxed font-light text-lg">
-                I&apos;m a creative professional passionate about building
-                meaningful digital experiences that connect people and solve
-                real-world problems through thoughtful design and technology.
+                Hi there, I&apos;m Charles Bai, a sophomore at Cornell University studying Computer Science.
+                I like to build projects that I find interesting in my free time, usually full-stack web applications.
+                My main interests are in backend development, cloud computing, and NLP.
+                Outside of coding, I like to play tennis, watch movies, and play games.
               </p>
             </div>
 
