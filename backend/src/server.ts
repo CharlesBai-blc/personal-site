@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import githubContributionsRouter from "./routes/github-contributions.js";
-import contactRouter from "./routes/contact.js";
 
 dotenv.config();
 
@@ -20,7 +19,6 @@ app.use(express.json());
 
 // Routes
 app.use("/api/github-contributions", githubContributionsRouter);
-app.use("/api/contact", contactRouter);
 
 // Health check
 app.get("/health", (req, res) => {

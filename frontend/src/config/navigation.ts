@@ -11,13 +11,9 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
   { href: "/about", label: "about" },
   { href: "/portfolio", label: "portfolio" },
-  { href: "/blog", label: "blog" },
-  { href: "/contact", label: "contact" },
 ];
 
 export const NAV_ANIMATION_DELAYS = {
   about: "500ms",
   portfolio: "600ms",
-  blog: "700ms",
-  contact: "800ms",
 } as const;

@@ -23,7 +23,7 @@ export default function SocialLinks({
 }: SocialLinksProps) {
   return (
     <div
-      className="fixed bottom-6 left-6 z-50 flex flex-col gap-4"
+      className="absolute bottom-6 left-6 z-50 flex flex-col gap-4"
       style={{ bottom: "4rem", left: "2rem" }}
     >
       {SOCIAL_LINKS.map((link, index) => (

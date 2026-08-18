@@ -28,7 +28,7 @@ export default function LocationInfo({
 
   return (
     <div
-      className="fixed top-6 right-6 z-50 text-right"
+      className="fixed top-6 right-6 z-50 hidden text-right sm:block"
       style={{ top: "1.5rem", right: "2.25rem" }}
     >
       <div
